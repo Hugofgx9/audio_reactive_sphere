@@ -1,6 +1,5 @@
-import Shape from './shape';
-//import Shape from './shape_twgl';
+import Render from "src/js/render";
 
-new Shape()
+console.log('hey')
 
-
+new Render()

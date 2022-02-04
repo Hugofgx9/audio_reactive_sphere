@@ -100,4 +100,4 @@ float snoise(vec3 v) {
                                 dot(p2,x2), dot(p3,x3) ) );
 }
 
-#pragma glslify: export(snoise)
+#pragma glslify: export(snoise);
