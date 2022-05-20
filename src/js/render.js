@@ -1,5 +1,5 @@
 import { Renderer, Geometry, Program, Mesh, Transform, Camera } from 'ogl';
-import Sketch from './sketch';
+import Sketch from './sketch2';
 
 
 export default class Render {
@@ -59,7 +59,7 @@ export default class Render {
     this.sketch.update();
 
     // Don't need a camera if camera uniforms aren't required
-    this.renderer.render({ scene: this.scene, camera: this.camera });
+    this.renderer.render({ scene: this.scene });
   }
 
   play() {
