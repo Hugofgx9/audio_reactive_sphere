@@ -136,10 +136,8 @@ void main() {
   float angle = atan(uv.y - .5, uv.x - .5);
   // angle += u_time * 0.1;
 
-
   // float movement = 0.1;
   float movement = sin(u_time);
-
 
   angle += movement * map(smoothstep(0., .5, d), 0.5, 1., 0., 0.5) + u_time * -0.3;
   // angle = 0.159 * (angle + 3.14); //from 0 to 1;
@@ -154,7 +152,7 @@ void main() {
   float x_off = cos(angle) * noise_scale + 10.;
   float y_off = sin(angle) * noise_scale + 13.;
 
-  float n = fbm(vec3(strength * vec2(x_off, y_off) - vec2(0, T3), -u_time + d * map(movement,-1.,1.,6.,20.) ));
+  float n = fbm(vec3(strength * vec2(x_off, y_off) - vec2(0, T3), -u_time + d * map(movement, -1., 1., 6., 20.)));
   // float c = 1. - 10. * pow(max(-0.5, length(q * vec2(1.8 + q.y * 1.5, .75)) - n * max(0., q.y + .25)), 1.2);
   float c = 1. - 3. * pow(max(-0.2, n * max(0., 3. * abs(q.y))), 2.);
   // float c = 1.;
@@ -165,22 +163,19 @@ void main() {
   c1 = (c1 * c1 * c1 * c1 * c1 * c1);
 
   vec3 col = vec3(0.);
-  // float color_amount = 1. + distance(uv, vec2(.5)) - mod(u_time, 3.) * 0.3;
-  // vec3 col = vec3(smoothstep(0., color_amount, c1));
+
+  // col = vec3(clamp(mod(u_time * 0.5, 2.), 0., 1.));
+  // vec3 col = vec3(color_amount);
 
   // vec3 col = vec3( color_amount );
 
-  col = vec3(c1);
+  // col = vec3(c1);
 
   // float a = c * (1. - pow(q.y, 3.));
   float a = 1.;
 
-
   // col += smoothstep(0., 0.4, c1) * vec3(0.9333, 0.3294, 0.0667);
   // col += smoothstep(0., 1., c1) * vec3(0.1843, 0.1843, 0.5216);
-
-
-
 
   // col = mix(col, vec3(0.0), smoothstep(0.0, 0.5, d));
 
@@ -190,8 +185,45 @@ void main() {
   // col += c1 * vec3(0.1098, 0.0, 0.9412);
 
   gl_FragColor = vec4(mix(vec3(0.), col, a), 1.0);
+
   // float e = pow(max(-0.2, n * max(0., q.y + .2)), 2.);
 
   // gl_FragColor = vec4( vec3(sin(angle)) , 1.);
   // gl_FragColor = vec4(vec3( 0.159 * (angle + 3.14) ), 1.);
+
+  // float color_amount = distance(uv, vec2(.5)) - clamp(mod(u_time * 0.5, 2.), 0., 1.) * 2. + 1.;
+  // float color_amount2 = distance(uv, vec2(.5)) - clamp(mod((u_time * 0.5) + 1., 2.), 0., 1.) * 2. + 1.;
+
+  float color_amount = distance(uv, vec2(.5)) * 2.;
+
+  color_amount = 1. - color_amount;
+  color_amount += u_time * 0.3;
+  // color_amount = color_amount * 1. + u_time * 4.;
+
+  // color_amount = mod(color_amount, 0.25) * 4.; 
+
+  float color_amount_1 = sin(color_amount);
+  float color_amount_2 = cos(color_amount);
+
+  float a1 = smoothstep(-1., 0., color_amount_1);
+  col = mix(col, vec3(1.0, 1.0, 1.0), a1);
+  float a2 = smoothstep(-1., 0., color_amount_2);
+  col = mix(col, vec3(0.102, 0.2941, 0.9255), a2);
+  float a3 = smoothstep(0., 1., color_amount_1);
+  col = mix(col, vec3(1.0, 0.051, 0.0), a3);
+  float a4 = smoothstep(0., 1., color_amount_2);
+  col = mix(col, vec3(0.9529, 0.498, 0.1961), a4);
+
+  col *= c1;
+
+
+  // col += vec3(color_amount);
+
+  // col += vec3(color_amount) * 0.5;
+  gl_FragColor = vec4(col, 1.);
+
+  // col += vec3(0.0, 0.251, 0.9412) * (1. - color_amount);
+  // col -= vec3(0.0, 0.0, 0.0) * (1. - color_amount2);
+
+  // col = max(vec3(color_amount), vec3(color_amount));
 }
