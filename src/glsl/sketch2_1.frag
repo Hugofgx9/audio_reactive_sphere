@@ -137,11 +137,7 @@ void main() {
   // angle += u_time * 0.1;
 
 
-  // float movement = 0.1;
-  float movement = sin(u_time);
-
-
-  angle += movement * map(smoothstep(0., .5, d), 0.5, 1., 0., 0.5) + u_time * -0.3;
+  angle += map(smoothstep(0., .5, d), 0.5, 1., 0., 0.5) + u_time * -0.1;
   // angle = 0.159 * (angle + 3.14); //from 0 to 1;
   // float n_angle = 0.159 * (angle + 3.14); //from 0 to 1;
   d -= 0.3;
@@ -150,42 +146,21 @@ void main() {
 
   q = vec2(angle * 3., d);
 
-  float noise_scale = 1.;
+  float noise_scale = 3.;
   float x_off = cos(angle) * noise_scale + 10.;
   float y_off = sin(angle) * noise_scale + 13.;
 
-  float n = fbm(vec3(strength * vec2(x_off, y_off) - vec2(0, T3), -u_time + d * map(movement,-1.,1.,6.,20.) ));
+  float n = fbm(vec3(strength * vec2(x_off, y_off) - vec2(0, T3), -u_time + d * 3. ));
   // float c = 1. - 10. * pow(max(-0.5, length(q * vec2(1.8 + q.y * 1.5, .75)) - n * max(0., q.y + .25)), 1.2);
   float c = 1. - 3. * pow(max(-0.2, n * max(0., 3. * abs(q.y))), 2.);
-  // float c = 1.;
   float c1 = n * c * (1.5 - pow(0.5 - q.y * 1., 5.));
   // float c1 = n * c * ;
   c1 = clamp(c1, 0., 1.);
 
-  c1 = (c1 * c1 * c1 * c1 * c1 * c1);
+  vec3 col = vec3(c1 * c1 * c1 * c1 * c1 * c1);
+  float a = c * (1. - pow(q.y, 3.));
 
-  // vec3 col = vec3(0.);
-  float color_amount = 1. + distance(uv, vec2(.5)) - mod(u_time, 3.) * 0.3;
-  vec3 col = vec3(smoothstep(0., color_amount, c1));
-
-  // vec3 col = vec3( color_amount );
-
-  // float a = c * (1. - pow(q.y, 3.));
-  float a = 1.;
-
-
-  // col += smoothstep(0., 0.4, c1) * vec3(0.9333, 0.3294, 0.0667);
-  // col += smoothstep(0., 1., c1) * vec3(0.1843, 0.1843, 0.5216);
-
-
-
-
-  // col = mix(col, vec3(0.0), smoothstep(0.0, 0.5, d));
-
-  // col = map(c1, 0.2, 0.4, 0., 1.) * vec3(0.9412, 0.0, 0.0);
-  // col += map(c1, 0.4, 1., 0., 1.) * vec3(0.0, 0.251, 0.9412);
-
-  // col += c1 * vec3(0.1098, 0.0, 0.9412);
+  // col += c1 * vec3(0.3373, 0.2627, 0.902);
 
   gl_FragColor = vec4(mix(vec3(0.), col, a), 1.0);
   // float e = pow(max(-0.2, n * max(0., q.y + .2)), 2.);

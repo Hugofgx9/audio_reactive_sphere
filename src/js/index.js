@@ -1,5 +1,4 @@
-import Render from "src/js/render";
-
-console.log('hey')
+import '@src/style/style.scss';
+import Render from "@src/js/render";
 
 new Render()
