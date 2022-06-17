@@ -164,11 +164,13 @@ void main() {
 
   c1 = (c1 * c1 * c1 * c1 * c1 * c1);
 
-  // vec3 col = vec3(0.);
-  float color_amount = 1. + distance(uv, vec2(.5)) - mod(u_time, 3.) * 0.3;
-  vec3 col = vec3(smoothstep(0., color_amount, c1));
+  vec3 col = vec3(0.);
+  // float color_amount = 1. + distance(uv, vec2(.5)) - mod(u_time, 3.) * 0.3;
+  // vec3 col = vec3(smoothstep(0., color_amount, c1));
 
   // vec3 col = vec3( color_amount );
+
+  col = vec3(c1);
 
   // float a = c * (1. - pow(q.y, 3.));
   float a = 1.;
