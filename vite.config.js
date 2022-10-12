@@ -1,6 +1,5 @@
 // vite.config.js
 import { defineConfig } from 'vite';
-import glsl from 'vite-plugin-glsl';
 const path = require('path');
 import glslify from './vite-plugins/vite-glslify';
 
