@@ -196,11 +196,11 @@ void main() {
 
   float color_amount = distance(uv, vec2(.5)) * 2.;
 
+  // color_amount = mod(color_amount, 0.25 *  0.2 + sin(u_time) * 4. ) * 4.; 
   color_amount = 1. - color_amount;
   color_amount += u_time * 0.3;
   // color_amount = color_amount * 1. + u_time * 4.;
 
-  // color_amount = mod(color_amount, 0.25) * 4.; 
 
   float color_amount_1 = sin(color_amount);
   float color_amount_2 = cos(color_amount);
@@ -215,6 +215,7 @@ void main() {
   col = mix(col, vec3(0.9529, 0.498, 0.1961), a4);
 
   col *= c1;
+
 
 
   // col += vec3(color_amount);

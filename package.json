@@ -12,19 +12,19 @@
   "license": "ISC",
   "browserslist": "> 0.2%",
   "devDependencies": {
-    "@parcel/transformer-glsl": "^2.2.1",
-    "@parcel/transformer-sass": "^2.2.1",
-    "eslint": "^7.22.0",
-    "parcel": "^2.0.0-beta.3.1",
-    "sass": "^1.51.0",
-    "vite": "^2.9.7",
-    "vite-plugin-glsl": "^0.1.2"
+    "@parcel/transformer-glsl": "^2.7.0",
+    "@parcel/transformer-sass": "^2.7.0",
+    "eslint": "^7.32.0",
+    "parcel": "^2.7.0",
+    "sass": "^1.55.0",
+    "vite": "^2.9.15",
+    "vite-plugin-glsl": "^0.1.5"
   },
   "dependencies": {
-    "@parcel/core": ">=2.6.0 <3.0.0",
+    "@parcel/core": "^2.7.0",
     "animejs": "^3.2.1",
-    "ogl": "^0.0.73",
-    "glslify": "^7.1.1"
+    "glslify": "^7.1.1",
+    "ogl": "^0.0.73"
   },
   "alias": {
     "src": "./src"
