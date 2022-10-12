@@ -15,7 +15,7 @@ void main() {
 	// 	+ texture2D(tMap, vUv)  * 1. * vec4(0., 1., 0., 1.)
 	// ;
 	gl_FragColor = vec4(
-		texture2D(tPreviousFrame, vUv) * 0.99 +
+		texture2D(tPreviousFrame, vUv) * uFeedbackAmount +
 		texture2D(tMap, vUv)
 	);
 	// gl_FragColor = vec4(texture2D(tPreviousFrame, vUv).rgb + texture2D(tMap, vUv).rgb, 1.);

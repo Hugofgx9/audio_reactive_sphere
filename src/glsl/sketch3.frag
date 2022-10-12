@@ -31,10 +31,10 @@ void main() {
 
 	vec3 color = color2;
 	// color = step(mod(v_uv.y + u_time * 0.01, 1.), 0.05) * color1;
-	color = color1;
+	color = color1 * step(mod(v_uv.y + u_time * 1., 1.), 0.05);
 	// color = cubicPulse(0.5, 0.0, mod(v_uv.y + u_time, 1.)) * color1;
 
-	float alpha = step(mod(v_uv.y + u_time * 1., 1.), 0.05);
+	float alpha = 1.;
 
 
 	// color *= smoothstep(n1 - size, n1, v_uv.x);
