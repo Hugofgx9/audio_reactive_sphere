@@ -1,7 +1,11 @@
 // vite.config.js
 import { defineConfig } from 'vite';
-const path = require('path');
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 import glslify from './vite-plugins/vite-glslify';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig({
