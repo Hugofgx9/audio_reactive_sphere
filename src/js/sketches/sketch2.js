@@ -1,6 +1,6 @@
 import { Renderer, Geometry, Program, Mesh, Plane, Box, Sphere, Triangle } from 'ogl';
-import frag from '../glsl/sketch2.frag';
-import vert from '../glsl/sketch2.vert';
+import frag from '@glsl/sketch2.frag';
+import vert from '@glsl/sketch2.vert';
 
 
 export default class Sketch {

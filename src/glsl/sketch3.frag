@@ -31,6 +31,7 @@ void main() {
 
 	vec3 color = color2;
 	// color = step(mod(v_uv.y + u_time * 0.01, 1.), 0.05) * color1;
+	// color = color1 * step(mod(v_uv.y + u_time * 1., 1.), 0.05);
 	color = color1 * step(mod(v_uv.y + u_time * 1., 1.), 0.05);
 	// color = cubicPulse(0.5, 0.0, mod(v_uv.y + u_time, 1.)) * color1;
 

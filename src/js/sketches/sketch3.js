@@ -1,6 +1,6 @@
 import { Program, Mesh, Triangle} from 'ogl';
-import frag from '../glsl/sketch3.frag';
-import vert from '../glsl/sketch2.vert';
+import frag from '@glsl/sketch3.frag';
+import vert from '@glsl/sketch2.vert';
 
 
 export default class Sketch {
