@@ -55,7 +55,6 @@ export default class Render {
     };
 
     const path_index = getCurrentURLPath();
-    // console.log(proce ss);
 
     this.sketch = new sketches[path_index](this.gl, {
       canvas: this.canvas,

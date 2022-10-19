@@ -1,4 +1,4 @@
-import { Post, RenderTarget, Texture } from 'ogl';
+import { Post } from 'ogl';
 import feedbackF from '@src/glsl/postprocess/feedback.frag';
 
 
@@ -24,7 +24,7 @@ export default class PostProces {
 			uniforms: {
 				uResolution: { value: [this.canvas.width, this.canvas.height] },
 				tPreviousFrame: { value: this.postFeedback.uniform },
-				uFeedbackAmount: { value: 0.95 },
+				uFeedbackAmount: { value: 0.998 },
 			},
 		});
 	}

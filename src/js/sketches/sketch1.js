@@ -1,4 +1,4 @@
-import { Renderer, Geometry, Program, Mesh, Plane, Box, Sphere } from 'ogl';
+import { Program, Mesh, Sphere } from 'ogl';
 import frag from '@glsl/sketch1.frag';
 import vert from '@glsl/sketch1.vert';
 

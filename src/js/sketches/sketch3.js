@@ -1,6 +1,6 @@
-import { Program, Mesh, Triangle} from 'ogl';
+import { Program, Mesh, Triangle, Plane } from 'ogl';
 import frag from '@glsl/sketch3.frag';
-import vert from '@glsl/sketch2.vert';
+import vert from '@glsl/sketch3.vert';
 
 
 export default class Sketch {
@@ -18,7 +18,11 @@ export default class Sketch {
 
 	init() {
 
-		const geometry = new Triangle(this.gl);
+		const geometry = new Triangle(this.gl, {});
+		// const geometry = new Plane(this.gl, {
+		// 	widthSegments: 100,
+		// 	heightSegments: 100,
+		// });
 
 		// const geometry = new Sphere(this.gl, {
 		// 	widthSegments: 200,
