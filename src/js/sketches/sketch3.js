@@ -1,4 +1,4 @@
-import { Program, Mesh, Triangle, Plane } from 'ogl';
+import { Program, Mesh, Triangle } from 'ogl';
 import frag from '@glsl/sketch3.frag';
 import vert from '@glsl/sketch3.vert';
 
@@ -11,31 +11,27 @@ export default class Sketch {
 		this.render = render;
 		this.scene = scene;
 
-		// this.gl.clearColor(0, 0, 0, 1);
+		this.gl.clearColor(0, 0, 0, 1);
 
 		this.init();
+
+	}
+
+	getSceneOptions() {
+		return {
+			postprocess: {
+				options: {
+					feedback: {
+						amount: 0.99,
+					}
+				}
+			}
+		};
 	}
 
 	init() {
 
 		const geometry = new Triangle(this.gl, {});
-		// const geometry = new Plane(this.gl, {
-		// 	widthSegments: 100,
-		// 	heightSegments: 100,
-		// });
-
-		// const geometry = new Sphere(this.gl, {
-		// 	widthSegments: 200,
-		// 	heightSegments: 200
-		// })
-		// const geometry = new Box(this.gl, {
-		// 	width: 1,
-		// 	height: 1,
-		// 	depth: 1,
-		// 	widthSegments: 60,
-		// 	heightSegments: 60,
-		// 	depthSegments: 60
-		// });
 
 		this.program = new Program(this.gl, {
 			vertex: vert,

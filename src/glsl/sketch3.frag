@@ -1,9 +1,9 @@
 precision highp float;
 
 // #pragma glslify: cosPalette = require(./utils/cosPalette.glsl);
-// #pragma glslify: snoise3 = require(./utils/simplex_noise_3d.glsl);
+#pragma glslify: snoise3 = require(./utils/noises/snoise3.glsl);
+#pragma glslify: snoise2 = require(./utils/noises/snoise2.glsl);
 // #pragma glslify: snoise4 = require(./utils/snoise4.glsl);
-// #pragma glslify: snoise2 = require(./utils/snoise2.glsl);
 #pragma glslify: circle = require(./utils/sdf/circle.glsl);
 #pragma glslify: hsl2rgb = require(./utils/colors/hsl2rgb.glsl);
 // #pragma glslify: map = require(./utils/map.glsl);
@@ -21,6 +21,7 @@ float cubicPulse(float c, float w, float x) {
 		return 0.0;
 	x /= w;
 	return 1.0 - x * x * (3.0 - 2.0 * x);
+
 }
 
 void main() {
@@ -44,10 +45,18 @@ void main() {
 
 	vec3 color = hsl2rgb(mod(u_time * .3, 1.), 1., 0.5);
 
+	float n = snoise2(1., u_time) * 0.5 + 0.5;
+
 	vec2 circle_center = vec2(
-		mod(0.2 + sin(u_time * 2.) * 0.5, 1.),
-		mod(u_time, 1.)
-		);
+		mod(u_time, 1.),
+		n
+	);
+	// vec2 circle_center = vec2(
+	// 	mod(0.2 + sin(u_time * 2.) * 0.5, 1.),
+	// 	mod(u_time, 1.)
+	// 	);
+
+	
 
 	color *= vec3(circle(circle_center, v_uv, 0.005));
 
@@ -69,4 +78,28 @@ void main() {
 	// color *= step(n2 - size, v_uv.y) * step( v_uv.y, n2 + size);
 	// color *= smoothstep(v_uv.y + n2, v_uv.y + n2 + 0.1, 1.);
 	gl_FragColor = vec4(color, alpha);
+}
+
+void main2(){
+
+
+	vec3 color = vec3(1.);
+	color = hsl2rgb(mod(u_time * 0.3, 1.), 1., 0.5);
+
+
+	float n = snoise2(v_uv.x * 0.5 + u_time * 2., 1.) * 0.5 + 0.5;
+	// n = smoothstep(n, n +0.01,v_uv.y);
+
+	float width = 0.008;
+	float smoothness = 0.005;
+	float halfwidth = width * .5;
+	n = smoothstep(n - (halfwidth + smoothness), n - halfwidth,v_uv.y) * (1. - smoothstep(n + halfwidth, n + (halfwidth + smoothness), v_uv.y));
+
+
+	color *= n;
+
+
+
+	gl_FragColor = vec4(color, 1.);
+
 }

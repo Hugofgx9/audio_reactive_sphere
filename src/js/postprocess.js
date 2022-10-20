@@ -10,7 +10,16 @@ export default class PostProces {
 		this.scene = webgl.scene;
 		this.camera = webgl.camera;
 		this.canvas = webgl.canvas;
-		this.init();
+
+		this.options = {
+			feedback: {
+				enable: true,
+				amount: 0.99,
+				// type: 1, //no implemanted
+			}
+		};
+
+		// this.init();
 	}
 
 	init() {
@@ -24,7 +33,7 @@ export default class PostProces {
 			uniforms: {
 				uResolution: { value: [this.canvas.width, this.canvas.height] },
 				tPreviousFrame: { value: this.postFeedback.uniform },
-				uFeedbackAmount: { value: 0.998 },
+				uFeedbackAmount: { value: this.options.feedback.amount },
 			},
 		});
 	}
@@ -36,22 +45,20 @@ export default class PostProces {
 	}
 
 	render() {
-
+		
 		//render current scene
 		this.postEmpty.targetOnly = true;
 		this.postEmpty.render({ scene: this.scene, camera: this.camera });
-
-
+		
 		//merge current scene and old + render it on target
 		this.postFeedback.targetOnly = true;
-		this.feedbackPass.enabled = true;
-		this.postFeedback.render({ texture: this.postEmpty.uniform.value });
-
-		//pass texture
-		this.feedbackPass.uniforms.tPreviousFrame.value = this.postFeedback.uniform.value;
-
+		this.postFeedback.render({ texture: this.postEmpty.uniform.value });		
+		
 		//finally render on canvas
 		this.postEmpty.targetOnly = false;
-		this.postEmpty.render({ texture: this.postFeedback.uniform.value})
+		this.postEmpty.render({ texture: this.postFeedback.uniform.value });
+
+		//pass texture for next frame
+		this.feedbackPass.uniforms.tPreviousFrame.value = this.postFeedback.uniform.value;
 	}
 }

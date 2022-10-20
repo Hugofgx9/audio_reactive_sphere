@@ -29,4 +29,9 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
+
+float snoise(float a, float b) {
+	return snoise(vec2(a, b));
+}
+
 #pragma glslify: export(snoise)

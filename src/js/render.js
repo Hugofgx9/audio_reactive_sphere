@@ -1,9 +1,9 @@
 import { Renderer, Geometry, Program, Mesh, Transform, Camera } from 'ogl';
+import { getCurrentURLPath, replaceNestedObjValues } from './utils';
 import PostProcess from './postprocess';
 import Sketch1 from '@sketches/sketch1';
 import Sketch2 from '@sketches/sketch2';
 import Sketch3 from '@sketches/sketch3';
-import { getCurrentURLPath } from './utils';
 
 
 export default class Render {
@@ -38,6 +38,7 @@ export default class Render {
     // const controls = new Orbit(camera);
 
     this.instantiateSketchFromPath();
+    this.postprocess.init();
 
     this.play();
   }
@@ -61,6 +62,10 @@ export default class Render {
       scene: this.scene,
       render: this,
     });
+
+    replaceNestedObjValues(this, this.sketch.getSceneOptions());
+
+    console.log(this.postprocess.options);
   }
 
 
