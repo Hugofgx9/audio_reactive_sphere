@@ -11,10 +11,7 @@ export default class Sketch {
 		this.canvas = canvas;
 		this.render = render;
 		this.scene = scene;
-
 		this.postprocess = new PostProcess(this.gl, { render: this.render });
-
-		console.log(this.postprocess)
 
 		this.gl.clearColor(0, 0, 0, 1);
 
