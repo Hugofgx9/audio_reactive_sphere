@@ -1,6 +1,6 @@
 precision highp float;
 
-#pragma glslify: cosPalette = require(../../glsl/utils/cosPalette.glsl);
+#pragma glslify: cosPalette = require(../../glsl/utils/cospalette.glsl);
 #pragma glslify: snoise3 = require(../../glsl/utils/noises/snoise3.glsl);
 #pragma glslify: snoise4 = require(../../glsl/utils/noises/snoise4.glsl);
 #pragma glslify: map = require(../../glsl/utils/map.glsl);
