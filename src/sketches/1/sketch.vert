@@ -1,6 +1,6 @@
-#pragma glslify: noise4 = require(./utils/noise_4d.glsl);
-#pragma glslify: snoise3 = require(./utils/noises/snoise3.glsl);
-#pragma glslify: rotate2d = require(./utils/rotate2d.glsl);
+#pragma glslify: noise4 = require(../../glsl/utils/noise_4d.glsl);
+#pragma glslify: snoise3 = require(../../glsl/utils/noises/snoise3.glsl);
+#pragma glslify: rotate2d = require(../../glsl/utils/rotate2d.glsl);
 
 attribute vec3 position;
 attribute vec3 normal;

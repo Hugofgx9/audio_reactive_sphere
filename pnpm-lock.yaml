@@ -11,6 +11,7 @@ specifiers:
   ogl: ^0.0.102
   parcel: ^2.7.0
   sass: ^1.55.0
+  tweakpane: ^3.1.0
   vite: ^3.1.7
 
 dependencies:
@@ -19,6 +20,7 @@ dependencies:
   animejs: 3.2.1
   glslify: 7.1.1
   ogl: 0.0.102
+  tweakpane: 3.1.0
 
 devDependencies:
   '@parcel/transformer-glsl': 2.7.0_@parcel+core@2.7.0
@@ -2811,6 +2813,10 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: true
+
+  /tweakpane/3.1.0:
+    resolution: {integrity: sha512-PGAp/LPQdHwzL7/iAW4lV1p9iPQTti7YMjMWO48CoYjvZRS59RmgQnhEGzKzqST1JnmOYmQUjTe8bdhlZRJs5A==}
+    dev: false
 
   /type-check/0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}

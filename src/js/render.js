@@ -1,9 +1,6 @@
 import { Renderer, Transform, Camera } from 'ogl';
 import { getCurrentURLPath } from './utils';
-import Sketch1 from '@sketches_1/sketch1';
-import Sketch2 from '@sketches/2';
-import Sketch3 from '@sketches/3';
-
+import sketches from './sketches';
 
 export default class Render {
 
@@ -45,13 +42,7 @@ export default class Render {
   }
 
   instantiateSketchFromPath() {
-    const sketches = {
-      1: Sketch1,
-      2: Sketch2,
-      3: Sketch3,
-    };
-
-    const path_index = getCurrentURLPath();
+    const path_index = getCurrentURLPath() - 1;
 
     this.sketch = new sketches[path_index](this.gl, {
       canvas: this.canvas,

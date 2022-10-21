@@ -1,6 +1,6 @@
 import { Program, Mesh, Sphere } from 'ogl';
-import frag from '@glsl/sketch1.frag';
-import vert from '@glsl/sketch1.vert';
+import frag from './sketch.frag';
+import vert from './sketch.vert';
 
 
 export default class Sketch {
@@ -10,6 +10,9 @@ export default class Sketch {
 		this.canvas = canvas;
 		this.render = render;
 		this.scene = scene;
+
+		this.gl.clearColor(0, 0, 0, 1);
+
 
 		this.init();
 	}
@@ -61,5 +64,6 @@ export default class Sketch {
 
 		this.mesh.program.uniforms.u_time.value = this.render.clock;
 
+		this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
 	}
 }

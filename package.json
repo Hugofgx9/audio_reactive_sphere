@@ -24,7 +24,8 @@
     "@parcel/core": "^2.7.0",
     "animejs": "^3.2.1",
     "glslify": "^7.1.1",
-    "ogl": "^0.0.102"
+    "ogl": "^0.0.102",
+    "tweakpane": "^3.1.0"
   },
   "alias": {
     "src": "./src"
