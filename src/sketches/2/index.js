@@ -1,6 +1,6 @@
-import { Renderer, Geometry, Program, Mesh, Plane, Box, Sphere, Triangle } from 'ogl';
-import frag from '@glsl/sketch2.frag';
-import vert from '@glsl/sketch2.vert';
+import { Program, Mesh, Triangle } from 'ogl';
+import frag from './sketch.frag';
+import vert from './sketch.vert';
 
 
 export default class Sketch {
@@ -17,19 +17,6 @@ export default class Sketch {
 	init() {
 
 		const geometry = new Triangle(this.gl);
-
-		// const geometry = new Sphere(this.gl, {
-		// 	widthSegments: 200,
-		// 	heightSegments: 200
-		// })
-		// const geometry = new Box(this.gl, {
-		// 	width: 1,
-		// 	height: 1,
-		// 	depth: 1,
-		// 	widthSegments: 60,
-		// 	heightSegments: 60,
-		// 	depthSegments: 60
-		// });
 
 		this.program = new Program(this.gl, {
 			vertex: vert,
@@ -57,6 +44,6 @@ export default class Sketch {
 		// this.mesh.rotation.z += 0.001;
 
 		this.mesh.program.uniforms.u_time.value = this.render.clock;
-
+		this.render.renderer.render({ scene: this.scene });
 	}
 }

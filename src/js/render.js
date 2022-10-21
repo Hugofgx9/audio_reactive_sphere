@@ -1,8 +1,7 @@
-import { Renderer, Geometry, Program, Mesh, Transform, Camera } from 'ogl';
-import { getCurrentURLPath, replaceNestedObjValues } from './utils';
-import PostProcess from './postprocess';
+import { Renderer, Transform, Camera } from 'ogl';
+import { getCurrentURLPath } from './utils';
 import Sketch1 from '@sketches_1/sketch1';
-import Sketch2 from '@sketches_1/sketch2';
+import Sketch2 from '@sketches/2';
 import Sketch3 from '@sketches/3';
 
 
@@ -29,16 +28,13 @@ export default class Render {
     this.gl = this.renderer.gl;
     this.clock = 0;
     this.scene = new Transform();
-    // this.postprocess = new PostProcess(this.gl, { webgl: this });
 
     this.camera = new Camera(this.gl, { fov: 35 });
     this.camera.position.set(0, 1, 7);
     this.camera.lookAt([0, 0, 0]);
     this.camera.perspective({ aspect: this.canvas.width / this.canvas.height });
-    // const controls = new Orbit(camera);
 
     this.instantiateSketchFromPath();
-    // this.postprocess.init();
 
     this.play();
   }
@@ -62,8 +58,6 @@ export default class Render {
       scene: this.scene,
       render: this,
     });
-
-    // replaceNestedObjValues(this, this.sketch.getSceneOptions());
 
   }
 

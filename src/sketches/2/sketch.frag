@@ -1,9 +1,9 @@
 precision highp float;
 
-#pragma glslify: cosPalette = require(./utils/cosPalette.glsl);
-#pragma glslify: snoise3 = require(./utils/noises/snoise3.glsl);
-#pragma glslify: snoise4 = require(./utils/noises/snoise4.glsl);
-#pragma glslify: map = require(./utils/map.glsl);
+#pragma glslify: cosPalette = require(../../glsl/utils/cosPalette.glsl);
+#pragma glslify: snoise3 = require(../../glsl/utils/noises/snoise3.glsl);
+#pragma glslify: snoise4 = require(../../glsl/utils/noises/snoise4.glsl);
+#pragma glslify: map = require(../../glsl/utils/map.glsl);
 
 uniform float u_time;
 uniform vec2 u_resolution;
