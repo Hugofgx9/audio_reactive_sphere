@@ -1,9 +1,9 @@
 import { Renderer, Geometry, Program, Mesh, Transform, Camera } from 'ogl';
 import { getCurrentURLPath, replaceNestedObjValues } from './utils';
 import PostProcess from './postprocess';
-import Sketch1 from '@sketches/sketch1';
-import Sketch2 from '@sketches/sketch2';
-import Sketch3 from '@sketches/sketch3';
+import Sketch1 from '@sketches_1/sketch1';
+import Sketch2 from '@sketches_1/sketch2';
+import Sketch3 from '@sketches/3';
 
 
 export default class Render {
@@ -29,7 +29,7 @@ export default class Render {
     this.gl = this.renderer.gl;
     this.clock = 0;
     this.scene = new Transform();
-    this.postprocess = new PostProcess(this.gl, { webgl: this });
+    // this.postprocess = new PostProcess(this.gl, { webgl: this });
 
     this.camera = new Camera(this.gl, { fov: 35 });
     this.camera.position.set(0, 1, 7);
@@ -38,7 +38,7 @@ export default class Render {
     // const controls = new Orbit(camera);
 
     this.instantiateSketchFromPath();
-    this.postprocess.init();
+    // this.postprocess.init();
 
     this.play();
   }
@@ -63,9 +63,8 @@ export default class Render {
       render: this,
     });
 
-    replaceNestedObjValues(this, this.sketch.getSceneOptions());
+    // replaceNestedObjValues(this, this.sketch.getSceneOptions());
 
-    console.log(this.postprocess.options);
   }
 
 
@@ -82,7 +81,7 @@ export default class Render {
     // Don't need a camera if camera uniforms aren't required
     // this.renderer.render({ scene: this.scene, camera: this.camera });
     // this.renderer.render({ scene: this.scene });
-    this.postprocess.render();
+    // this.postprocess.render();
   }
 
   play() {

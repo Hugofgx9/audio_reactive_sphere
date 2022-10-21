@@ -15,6 +15,9 @@ export default function glslify() {
 				const filename = path.basename(shader);
 
 
+				console.log(filename);
+
+
 				// source = source.replace(/\n/g, ' '); //transform multiline to inline
 
 				return await transformWithEsbuild(

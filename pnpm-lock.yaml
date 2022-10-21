@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@hugofgx9/glsl-toys': ^1.0.0
   '@parcel/core': ^2.7.0
   '@parcel/transformer-glsl': ^2.7.0
   '@parcel/transformer-sass': ^2.7.0
@@ -13,6 +14,7 @@ specifiers:
   vite: ^3.1.7
 
 dependencies:
+  '@hugofgx9/glsl-toys': 1.0.0
   '@parcel/core': 2.7.0
   animejs: 3.2.1
   glslify: 7.1.1
@@ -89,6 +91,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@hugofgx9/glsl-toys/1.0.0:
+    resolution: {integrity: sha512-RO/ajdwR7qbzmVnkw+rsNpXJ4U0jUbXS9OgsIE4Q7YeMWgtzoOYeow2TnNxixmbqMQwnCLG01p6DVyR3gPTn3w==}
+    dev: false
 
   /@humanwhocodes/config-array/0.10.7:
     resolution: {integrity: sha512-MDl6D6sBsaV452/QSdX+4CXIjZhIcI0PELsxUjk4U828yd58vk3bTIvk/6w5FY+4hIy9sLW0sfrV7K7Kc++j/w==}
