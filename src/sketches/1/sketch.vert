@@ -1,4 +1,4 @@
-#pragma glslify: noise4 = require(../../glsl/utils/noise_4d.glsl);
+#pragma glslify: noise4 = require(../../glsl/utils/noises/snoise4.glsl);
 #pragma glslify: snoise3 = require(../../glsl/utils/noises/snoise3.glsl);
 #pragma glslify: rotate2d = require(../../glsl/utils/rotate2d.glsl);
 

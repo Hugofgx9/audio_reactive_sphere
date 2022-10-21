@@ -1,6 +1,6 @@
 precision highp float;
 
-#pragma glslify: cosPalette = require(../../glsl/utils/cosPalette.glsl);
+#pragma glslify: cosPalette = require(../../glsl/utils/cospalette.glsl);
 
 uniform float u_time;
 uniform vec2 u_resolution;
