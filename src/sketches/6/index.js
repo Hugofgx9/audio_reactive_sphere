@@ -1,4 +1,5 @@
-import { Program, Mesh, Triangle, Sphere, Orbit, Vec3 } from 'ogl';
+import { Program, Mesh, Plane, Triangle, Sphere, Orbit, Vec3 } from 'ogl';
+import Particles from './particles';
 import PostProcess from './postprocess';
 import frag from './sketch.frag';
 import vert from './sketch.vert';
@@ -13,6 +14,7 @@ export default class Sketch {
 		this.render = render;
 		this.scene = scene;
 		this.postprocess = new PostProcess(this.gl, { render: this.render });
+		this.particles = new Particles(this.gl, { render, sketch: this });
 
 
 		this.controls = new Orbit(this.render.camera, {
@@ -30,8 +32,9 @@ export default class Sketch {
 
 		// const geometry = new Triangle(this.gl, {});
 
-		const geometry = new Sphere(this.gl, {
-			widthSegments: 22,
+		const geometry = new Plane(this.gl, {
+			widthSegments: 80,
+			heightSegments: 80,
 		});
 
 		const nb = geometry.attributes.position.count;
@@ -64,13 +67,20 @@ export default class Sketch {
 		geometry.attributes.normal.needsUpdate = true;
 
 
+		//particles gpugpu
+		this.particles.particles_nb = geometry.attributes.position.count;
+		this.particles.init();
+
+		geometry.addAttribute('g_coords', { size: 2, data: this.particles.position_GPGPU.coords });
+
+
 		this.program = new Program(this.gl, {
 			vertex: vert,
 			fragment: frag,
 			uniforms: {
 				u_time: { value: 0 },
 				u_resolution: { value: [this.canvas.width, this.canvas.height] },
-
+				t_position: this.particles.position_GPGPU.uniform
 			},
 			transparent: true,
 			cullFace: false
@@ -92,6 +102,7 @@ export default class Sketch {
 		// this.mesh.rotation.z += 0.001;
 
 		this.mesh.program.uniforms.u_time.value = this.render.clock;
+		this.particles.update();
 
 		// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
 		this.controls.update();

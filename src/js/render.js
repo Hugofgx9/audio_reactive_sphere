@@ -33,10 +33,14 @@ export default class Render {
 
     this.instantiateSketchFromPath();
 
+    window.addEventListener('resize', () => this.resize());
     this.play();
+
   }
 
   resize() {
+
+    // this.sketch.onResize();
     // todo
 
   }
