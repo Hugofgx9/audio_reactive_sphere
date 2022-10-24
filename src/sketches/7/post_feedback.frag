@@ -22,8 +22,15 @@ void main() {
 
 	// for(float i = 0.; i < 10.; i += 1.) {
 
-	// 	current_scene += texture2D(tMap, ((vUv - 0.5) * (i * 1.)) + 0.5 );
+	// 	current_scene += texture2D(tMap, ((vUv - 0.5) * 0.9) + 0.5 );
+	// 	// current_scene += texture2D(tMap, ((vUv - 0.5) * (i * 1.)) + 0.5 );
 	// }
+
+	// current_scene += texture2D(tMap, ((vUv - 0.5) * 1.05) + 0.5 );
+	// current_scene += texture2D(tMap, ((vUv - 0.5) * 1.1) + 0.:5 );
+	// current_scene += texture2D(tMap, ((vUv - 0.5) * 1.15) + 0.5 );
+	// current_scene += texture2D(tMap, ((vUv - 0.5) * 1.2) + 0.5 );
+
 
 	gl_FragColor = vec4(max(previous_frame, vec4(0.)) + current_scene);
 	// gl_FragColor = vec4(texture2D(tPreviousFrame, vUv) * uFeedbackAmount + texture2D(tMap, vUv));

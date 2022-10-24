@@ -4,6 +4,7 @@ import Sketch3 from '@sketches/3';
 import Sketch4 from '@sketches/4';
 import Sketch5 from '@sketches/5';
 import Sketch6 from '@sketches/6';
+import Sketch7 from '@sketches/7';
 
 
 export default [
@@ -13,4 +14,5 @@ export default [
 	Sketch4,
 	Sketch5,
 	Sketch6,
+	Sketch7,
 ];

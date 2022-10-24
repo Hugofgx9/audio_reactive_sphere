@@ -28,7 +28,7 @@ export default class PostProcess {
 			uniforms: {
 				uResolution: { value: [this.canvas.width, this.canvas.height] },
 				tPreviousFrame: { value: this.postFeedback.uniform },
-				uFeedbackAmount: { value: 0.94 },
+				uFeedbackAmount: { value: 0.6 },
 			},
 		});
 
@@ -72,7 +72,7 @@ export default class PostProcess {
 			uniforms: {
 				uResolution: { value: [this.canvas.width, this.canvas.height] },
 				tBloom: this.postBloom.uniform,
-				uBloomStrength: { value: 4 },
+				uBloomStrength: { value: 2 },
 			},
 		});
 	}
