@@ -1,4 +1,7 @@
 import '@src/style/style.scss';
-import Render from "@src/js/render";
+import Alpine from 'alpinejs'
+import Sketches from '@src/js/sketches.js'
+// import Render from "@src/js/render";
 
-new Render();
+Alpine.start();
+// new Render();

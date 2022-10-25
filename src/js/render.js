@@ -2,12 +2,10 @@ import { Renderer, Transform, Camera } from 'ogl';
 import { getCurrentURLPath } from './utils';
 import sketches from './sketches';
 
-export default class Render {
+class Render {
 
   constructor() {
-
     this.init();
-
   }
 
   init() {
@@ -83,4 +81,7 @@ export default class Render {
     this.request = null;
   }
 }
+
+const render = new Render()
+export default render;
 

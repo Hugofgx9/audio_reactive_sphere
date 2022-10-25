@@ -2,6 +2,10 @@ export function getCurrentURLPath() {
 	return window.location.pathname.match(/\/(.*)/m)[1];
 }
 
+export function getCurrenURLOrigin(){
+	return window.location.origin;
+}
+
 export function applySketchOptionsOnRender(render_instance, sketch_instance) {
 
 	const ren = render_instance;
