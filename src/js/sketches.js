@@ -1,5 +1,3 @@
-import Alpine from 'alpinejs';
-
 import Sketch1 from '@sketches/1';
 import Sketch2 from '@sketches/2';
 import Sketch3 from '@sketches/3';
@@ -24,13 +22,3 @@ const sketches = [
 	Sketch8,
 ];
 export default sketches;
-
-
-
-Alpine.store('sketches', {
-	items: sketches.map((s, i) => i + 1),
-});
-
-Alpine.store('navigation', {
-	isRootPath: window.location.pathname === '/'
-});
