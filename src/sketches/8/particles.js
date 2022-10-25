@@ -27,7 +27,9 @@ export default class Particles {
 				u_time: { value: this.render.clock },
 				t_initialPos: this.initialPos.uniform,
 				t_randomSign: this.random_sign.uniform,
-				u_middle_space: { value: 0.06 }
+				u_middle_space: { value: 0.18 },
+				u_density: {value: 0.},
+				u_ring: {value: 1.},
 			},
 		});
 	}
@@ -83,6 +85,7 @@ export default class Particles {
 			let x2 = Math.random();
 			// let x2 = Math.max(Math.random() * 0.1, 0.02);
 			let x3 = Math.random();
+			let x4 = Math.random();
 
 			// const mag = Math.sqrt(x1 * x1 + x2 * x2 + x3 * x3);
 			// x1 /= mag; x2 /= mag; x3 /= mag;
@@ -95,7 +98,8 @@ export default class Particles {
 					x1,
 					x2,
 					x3,
-					0
+					x4,
+					
 				],
 				i * 4
 			);

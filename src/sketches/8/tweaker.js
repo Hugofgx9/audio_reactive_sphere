@@ -27,6 +27,20 @@ export default class Tweaker {
 			step: 0.00001
 		});
 
+		particles.addInput(this.sketch.particles.position.passes[0].uniforms.u_density, 'value', {
+			label: 'Density',
+			min: 0,
+			max: 1,
+			step: 0.00001
+		});
+
+		particles.addInput(this.sketch.particles.position.passes[0].uniforms.u_ring, 'value', {
+			label: 'Ring',
+			min: 0,
+			max: 1,
+			step: 0.00001
+		});
+
 
 		pp_feedback.addInput(this.sketch.postprocess.feedbackPass.uniforms.uFeedbackAmount, 'value', {
 			label: 'FeedbackAmount',

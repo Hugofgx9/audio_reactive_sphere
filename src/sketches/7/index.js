@@ -80,7 +80,7 @@ export default class Sketch {
 			uniforms: {
 				u_time: { value: 0 },
 				u_resolution: { value: [this.canvas.width, this.canvas.height] },
-				t_position: this.particles.position.uniform
+				t_position: this.particles.position.uniform,
 			},
 			transparent: true,
 			cullFace: false
@@ -111,17 +111,15 @@ export default class Sketch {
 		this.scene.addChild(this.mesh2);
 		this.scene.addChild(this.mesh3);
 
-		this.mesh2.scale = [0.6, 0.6, 0.6];
+		this.mesh1.scale = [1.8, 1.8, 1.8];
+		this.mesh2.scale = [1.1, 1.1, 1.1];
+		this.mesh3.scale = [1.0, 1.0, 1.0];
+
 		this.mesh2.rotation.z = 0.9;
 
-		this.mesh3.scale = [.5, .5, .5];
 		this.mesh3.rotation.z = Math.PI / 2;
 
 		this.mesh1.rotation.z = -0.2;
-
-
-
-
 	}
 
 	update() {

@@ -94,44 +94,14 @@ export default class Sketch {
 			program: this.program
 		});
 
-		this.mesh2 = new Mesh(this.gl, {
-			mode: this.gl.POINTS,
-			geometry,
-			program: this.program
-		});
-
-		this.mesh3 = new Mesh(this.gl, {
-			mode: this.gl.POINTS,
-			geometry,
-			program: this.program
-		});
+		this.mesh1.scale = [2,2,2];
 
 
 		this.scene.addChild(this.mesh1);
-		this.scene.addChild(this.mesh2);
-		this.scene.addChild(this.mesh3);
-
-		this.mesh2.scale = [0.6, 0.6, 0.6];
-		this.mesh2.rotation.z = 0.9;
-
-		this.mesh3.scale = [.5, .5, .5];
-		this.mesh3.rotation.z = Math.PI / 2;
-
-		this.mesh1.rotation.z = -0.2;
-
-
-
-
 	}
 
 	update() {
 
-		this.mesh2.rotation.x += 0.001;
-		this.mesh3.rotation.y -= 0.002;
-		this.mesh3.rotation.z += 0.003;
-
-		this.mesh1.rotation.y += 0.003;
-		this.mesh1.rotation.z -= 0.002;
 		// this.mesh2.rotation.z += 0.007;
 
 		this.mesh1.program.uniforms.u_time.value = this.render.clock;

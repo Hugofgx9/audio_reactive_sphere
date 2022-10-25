@@ -10,6 +10,9 @@ import Sketch7 from '@sketches/7';
 import Sketch8 from '@sketches/8';
 
 
+// const sketches = import.meta.glob('../sketches/*/index.js')
+
+
 const sketches = [
 	Sketch1,
 	Sketch2,

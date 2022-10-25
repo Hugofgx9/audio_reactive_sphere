@@ -17,7 +17,7 @@ void main() {
 	vec3 color = vec3(v_uv, 1.);
 
 	vec3 color1 = vec3(0.3, 0.0, 0.3);
-	vec3 color2 = vec3(0.65, 0.2, 0.3);
+	vec3 color2 = vec3(0.65, 0.2, 0.5);
 
 	color = mix(hsl2rgb(color1), hsl2rgb(color2), pow(mod(v_uv.y + u_time, 1.), 2.));
 
