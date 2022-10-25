@@ -22,6 +22,7 @@
   "dependencies": {
     "@hugofgx9/glsl-toys": "^1.0.0",
     "@parcel/core": "^2.7.0",
+    "@tweakpane/plugin-essentials": "^0.1.5",
     "alpinejs": "^3.10.4",
     "animejs": "^3.2.1",
     "glslify": "^7.1.1",

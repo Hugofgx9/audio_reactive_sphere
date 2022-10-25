@@ -24,7 +24,7 @@ export default class Sketch {
 
 		this.gl.clearColor(0, 0, 0, 1);
 		this.init();
-		new Tweaker(this)
+		this.tweaker = new Tweaker(this);
 	}
 
 
@@ -33,8 +33,8 @@ export default class Sketch {
 		// const geometry = new Triangle(this.gl, {});
 
 		const geometry = new Plane(this.gl, {
-			widthSegments: 300,
-			heightSegments: 300,
+			widthSegments: 250,
+			heightSegments: 250,
 		});
 
 		const nb = geometry.attributes.position.count;
@@ -93,22 +93,36 @@ export default class Sketch {
 			geometry,
 			program: this.program
 		});
+		this.mesh2 = new Mesh(this.gl, {
+			mode: this.gl.POINTS,
+			geometry,
+			program: this.program
+		});
 
-		this.mesh1.scale = [2,2,2];
+		this.mesh1.scale = [2, 2, 2];
+		this.mesh2.scale = [0.5, 0.5, 0.5];
+
+		// this.mesh2.rotation.y = Math.PI / 2;
+		// this.mesh2.rotation.x = Math.PI / 2;
+
 
 
 		this.scene.addChild(this.mesh1);
+		this.scene.addChild(this.mesh2);
 	}
 
 	update() {
-
-		// this.mesh2.rotation.z += 0.007;
-
+		this.tweaker.fpsGraph.begin();
+		
+		this.mesh2.rotation.x += 0.007;
+		
 		this.mesh1.program.uniforms.u_time.value = this.render.clock;
 		this.particles.update();
-
+		
 		// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
 		// this.controls.update();
 		this.postprocess.render();
+
+		this.tweaker.fpsGraph.end();
 	}
 }

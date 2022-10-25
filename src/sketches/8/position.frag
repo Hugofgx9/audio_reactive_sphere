@@ -59,9 +59,9 @@ void main() {
 	phi = map(phi, -1., 1., 0., PI);
 
 
-	float length = map(sqrt(initialPos.w), 0., 1., -u_ring, u_ring);
-	length = u_density * length * length + length * (1. - u_density);
-	length += 1.;
+	float lenght_offset = map(sqrt(initialPos.w), 0., 1., -u_ring, u_ring);
+	lenght_offset = u_density * lenght_offset * lenght_offset + lenght_offset * (1. - u_density);
+	float length = 1. + lenght_offset;
 	// float length = map(random_sign.x, -1., 1., 1., 0.5);
 
 	pos.z = length * cos(theta) * sin(phi);
@@ -70,9 +70,10 @@ void main() {
 	
 
 	// pos.yz = rotate2d(initialPos.yz, u_time);
-	pos.xz = rotate2d(pos.xz, u_time * 1.);
+	pos.xz = rotate2d(pos.xz,  u_time * 1.);
+	// pos.xz = rotate2d(pos.xz,  length * u_time * 1.);
 	// pos.yz = rotate2d(pos.yz, u_time * 0.4);
-	// pos.xy = rotate2d(pos.xy, u_time * 1.3);
+	pos.xy = rotate2d(pos.xy, u_time * 0.8);
 
 	// pos.y += u_time * 0.001;
 

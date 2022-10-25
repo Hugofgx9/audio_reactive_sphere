@@ -5,6 +5,7 @@ specifiers:
   '@parcel/core': ^2.7.0
   '@parcel/transformer-glsl': ^2.7.0
   '@parcel/transformer-sass': ^2.7.0
+  '@tweakpane/plugin-essentials': ^0.1.5
   alpinejs: ^3.10.4
   animejs: ^3.2.1
   eslint: ^8.25.0
@@ -18,6 +19,7 @@ specifiers:
 dependencies:
   '@hugofgx9/glsl-toys': 1.0.0
   '@parcel/core': 2.7.0
+  '@tweakpane/plugin-essentials': 0.1.5_tweakpane@3.1.0
   alpinejs: 3.10.4
   animejs: 3.2.1
   glslify: 7.1.1
@@ -966,6 +968,14 @@ packages:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
     dev: true
+
+  /@tweakpane/plugin-essentials/0.1.5_tweakpane@3.1.0:
+    resolution: {integrity: sha512-dt+fwtUEVmBxsVhGNSqtY6dN3rOmxIt3zSA/cSFMs2eBbMrnBTSkJBe2JMXKodTTR6OOFihq6yxyRFqG5wsP3w==}
+    peerDependencies:
+      tweakpane: ^3.1.0
+    dependencies:
+      tweakpane: 3.1.0
+    dev: false
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
