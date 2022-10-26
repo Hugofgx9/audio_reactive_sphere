@@ -15,19 +15,16 @@ export default class Particles {
 
 	init() {
 
-		this.initialPos = this.createInitialPos();
 		this.position = this.createPosition();
+		this.initialPos = this.createInitialPos();
 		this.random_sign = this.createRandomSign();
-		// const a = this.createRandomSignTexture();
-
-		this.initialPos.render();
 
 		this.position.addPass({
 			fragment: positionFrag,
 			uniforms: {
 				u_time: { value: this.render.clock },
-				t_initialPos: this.initialPos.uniform,
-				t_randomSign: this.random_sign.uniform,
+				t_initialPos: {value: this.initialPos},
+				t_randomSign: {value: this.random_sign},
 				// t_randomSign: { value: a },
 				u_middle_space: { value: 1 },
 				u_noise_amount: { value: 0 },
@@ -36,55 +33,6 @@ export default class Particles {
 				u_ring: { value: 0.19 },
 			},
 		});
-	}
-
-	createRandomSign() {
-		const length = this.particles_nb;
-		const data = new Float32Array(length * 4);
-
-		//sphere coordinates
-		for (let i = 0; i < length; i++) {
-
-			data.set(
-				[
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-				],
-				i * 4
-			);
-		}
-
-		return new GPGPU(this.gl, { data });
-	}
-
-	createRandomSignTexture() {
-
-		const length = this.particles_nb;
-		const data = new Int8Array(length * 4);
-
-		//sphere coordinates
-		for (let i = 0; i < length; i++) {
-
-			data.set(
-				[
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-				],
-				i * 4
-			);
-		}
-
-		return new Texture(this.gl, {
-			width: Math.sqrt(length),
-			image: data,
-			type: this.gl.BYTE,
-		});
-		// return new GPGPU(this.gl, { data });}
-
 	}
 
 	createPosition() {
@@ -107,10 +55,46 @@ export default class Particles {
 		return new GPGPU(this.gl, { data });
 	}
 
+	createRandomSign() {
+		const length = this.particles_nb;
+		// Find smallest PO2 that fits data
+		const size = Math.pow(2, Math.ceil(Math.log(Math.ceil(Math.sqrt(length))) / Math.LN2));
+		const data = new Float32Array(size * size * 4);
+
+		//sphere coordinates
+		for (let i = 0; i < length; i++) {
+
+			data.set([
+					Math.random() > 0.5 ? 1 : -1,
+					Math.random() > 0.5 ? 1 : -1,
+					Math.random() > 0.5 ? 1 : -1,
+					Math.random() > 0.5 ? 1 : -1,
+				],
+				i * 4
+			);
+		}
+
+		return new Texture(this.gl, {
+			image: data, 
+			type: this.gl.FLOAT,
+			format: this.gl.RGBA,
+			internalFormat: this.gl.renderer.isWebgl2 ? this.gl.RGBA32F : this.gl.RGBA,
+			wrapS: this.gl.CLAMP_TO_EDGE,
+			wrapT: this.gl.CLAMP_TO_EDGE,
+			generateMipmaps: false,
+			minFilter: this.gl.NEAREST,
+			magFilter: this.gl.NEAREST,
+			width: size,
+			flipY: false,
+		})
+
+	}
 
 	createInitialPos() {
 		const length = this.particles_nb;
-		const data = new Float32Array(length * 4);
+
+		const size = Math.pow(2, Math.ceil(Math.log(Math.ceil(Math.sqrt(length))) / Math.LN2));
+		const data = new Float32Array(size * size * 4);
 
 		//sphere coordinates
 		for (let i = 0; i < length; i++) {
@@ -155,7 +139,19 @@ export default class Particles {
 		// }
 
 
-		return new GPGPU(this.gl, { data });
+		return new Texture(this.gl, {
+			image: data, 
+			type: this.gl.FLOAT,
+			format: this.gl.RGBA,
+			internalFormat: this.gl.renderer.isWebgl2 ? this.gl.RGBA32F : this.gl.RGBA,
+			wrapS: this.gl.CLAMP_TO_EDGE,
+			wrapT: this.gl.CLAMP_TO_EDGE,
+			generateMipmaps: false,
+			minFilter: this.gl.NEAREST,
+			magFilter: this.gl.NEAREST,
+			width: size,
+			flipY: false,
+		})
 	}
 
 	update() {
