@@ -41,7 +41,7 @@ export default class PostProcess {
 		this.brightPass = this.postBloom.addPass({
 			fragment: brightF,
 			uniforms: {
-				uThreshold: { value: 0.18 },
+				uThreshold: { value: 0.66 },
 			},
 		});
 

@@ -1,6 +1,7 @@
 import { Program, Mesh, Plane, Triangle, Sphere, Orbit, Vec3 } from 'ogl';
 import Particles from './particles';
 import PostProcess from './postprocess';
+import Presets from './presets';
 import frag from './sketch.frag';
 import vert from './sketch.vert';
 import Tweaker from './tweaker';
@@ -25,6 +26,7 @@ export default class Sketch {
 		this.gl.clearColor(0, 0, 0, 1);
 		this.init();
 		this.tweaker = new Tweaker(this);
+		this.presets = new Presets(this, { tweaker: this.tweaker });
 	}
 
 
@@ -32,9 +34,10 @@ export default class Sketch {
 
 		// const geometry = new Triangle(this.gl, {});
 
+		//todo custom geometry
 		const geometry = new Plane(this.gl, {
-			widthSegments: 250,
-			heightSegments: 250,
+			widthSegments: 300,
+			heightSegments: 300,
 		});
 
 		const nb = geometry.attributes.position.count;
@@ -79,6 +82,8 @@ export default class Sketch {
 			fragment: frag,
 			uniforms: {
 				u_time: { value: 0 },
+				u_color1: { value: [0.3, 0, 0.3] },
+				u_color2: { value: [0.65, 0.2, 0.5] },
 				u_resolution: { value: [this.canvas.width, this.canvas.height] },
 				t_position: this.particles.position.uniform
 			},
@@ -113,12 +118,12 @@ export default class Sketch {
 
 	update() {
 		this.tweaker.fpsGraph.begin();
-		
+
 		this.mesh2.rotation.x += 0.007;
-		
+
 		this.mesh1.program.uniforms.u_time.value = this.render.clock;
 		this.particles.update();
-		
+
 		// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
 		// this.controls.update();
 		this.postprocess.render();

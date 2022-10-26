@@ -1,6 +1,6 @@
 import { Pane } from 'tweakpane';
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials';
-import { applyPreset } from './presets';
+import { hslToRgb, rgbToHsl, formatTweakerColor} from './utils';
 
 export default class Tweaker {
 
@@ -31,7 +31,7 @@ export default class Tweaker {
 			lineCount: 1.8,
 		});
 
-		const particles = this.addFolder(this._, 'Particles', { expanded: true });
+		const particles = this.addFolder(this._, 'Particles', { expanded: false });
 		const pp_feedback = this.addFolder(this._, 'Feedback', { expanded: false });
 		const pp_bloom = this.addFolder(this._, 'Bloom', { expanded: false });
 		const preset = this.addFolder(this._, 'Presets', { expended: false });
@@ -60,6 +60,32 @@ export default class Tweaker {
 			min: 0,
 			max: 1,
 			step: 0.00001
+		});
+
+		const colors = {
+			color1: formatTweakerColor(hslToRgb(...this.sketch.program.uniforms.u_color1.value)),
+			color2: formatTweakerColor(hslToRgb(...this.sketch.program.uniforms.u_color2.value)),
+		};
+
+		particles.addInput(colors, 'color1', {
+			label: 'Color1',
+			presetKey: 'color1',
+			color: { type: 'float' },
+			view: '',
+			picker: 'inline',
+			// expanded: true,
+		}).on('change', (ev) => {
+			this.sketch.program.uniforms.u_color1.value = rgbToHsl(...Object.values(ev.value));
+		});
+		particles.addInput(colors, 'color2', {
+			label: 'Color2',
+			presetKey: 'color2',
+			color: { type: 'float' },
+			view: '',
+			picker: 'inline',
+			// expanded: true,
+		}).on('change', (ev) => {
+			this.sketch.program.uniforms.u_color2.value = rgbToHsl(...Object.values(ev.value));
 		});
 
 
@@ -100,10 +126,6 @@ export default class Tweaker {
 
 
 		//presets
-		const preset_params = {
-			export: '',
-		};
-
 		preset.addBlade({
 			view: 'buttongrid',
 			label: 'Presets',
@@ -112,13 +134,14 @@ export default class Tweaker {
 				title: y * 5 + x + 1,
 			}),
 		}).on('click', (ev) => {
-			applyPreset(ev.cell.title - 1, this)
+
+			this.sketch.presets.applyPreset(ev.cell.title - 1);
 		});
 
 		preset.addButton({
 			title: 'Copy Params',
 		}).on('click', () => {
-			navigator.clipboard.writeText(JSON.stringify(this._.exportPreset()))
+			navigator.clipboard.writeText(JSON.stringify(this._.exportPreset()));
 			// preset_params.export = JSON.stringify(this._.exportPreset());
 		});
 	}

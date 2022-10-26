@@ -11,13 +11,15 @@ precision highp float;
 uniform float u_time;
 uniform vec2 u_resolution;
 varying vec2 v_uv;
+uniform vec3 u_color1; //hsl
+uniform vec3 u_color2; //hsl
 
 void main() {
 
 	vec3 color = vec3(v_uv, 1.);
 
-	vec3 color1 = vec3(0.3, 0.0, 0.3);
-	vec3 color2 = vec3(0.65, 0.2, 0.5);
+	vec3 color1 = u_color1;
+	vec3 color2 = u_color2;
 
 	color = mix(hsl2rgb(color1), hsl2rgb(color2), pow(mod(v_uv.y + u_time, 1.), 2.));
 

@@ -19,4 +19,7 @@ export default defineConfig({
       '@glsl': path.resolve(__dirname, './src/glsl'),
     },
   },
+  build: {
+    sourcemap: true,
+  },
 });

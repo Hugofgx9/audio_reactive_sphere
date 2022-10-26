@@ -27,9 +27,9 @@ export default class Particles {
 				u_time: { value: this.render.clock },
 				t_initialPos: this.initialPos.uniform,
 				t_randomSign: this.random_sign.uniform,
-				u_middle_space: { value: 0.18 },
-				u_density: {value: 0.},
-				u_ring: {value: 1.},
+				u_middle_space: { value: 1 },
+				u_density: {value: 0.97},
+				u_ring: {value: 0.19},
 			},
 		});
 	}
