@@ -110,6 +110,8 @@ export default class Sketch {
 		// this.mesh2.rotation.y = Math.PI / 2;
 		// this.mesh2.rotation.x = Math.PI / 2;
 
+		this.mesh2_rotation = 0;
+
 
 
 		this.scene.addChild(this.mesh1);
@@ -119,7 +121,8 @@ export default class Sketch {
 	update() {
 		this.tweaker.fpsGraph.begin();
 
-		this.mesh2.rotation.x += 0.007;
+		this.mesh2_rotation += 0.007;
+		this.mesh2.rotation.x = this.mesh2_rotation;
 
 		this.mesh1.program.uniforms.u_time.value = this.render.clock;
 		this.particles.update();

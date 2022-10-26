@@ -61,6 +61,13 @@ export default class Tweaker {
 			max: 1,
 			step: 0.00001
 		});
+		particles.addInput(this.sketch.particles.position.passes[0].uniforms.u_noise_amount, 'value', {
+			label: 'Noise',
+			presetKey: 'noise',
+			min: 0,
+			max: 1,
+			step: 0.00001
+		});
 
 		const colors = {
 			color1: formatTweakerColor(hslToRgb(...this.sketch.program.uniforms.u_color1.value)),

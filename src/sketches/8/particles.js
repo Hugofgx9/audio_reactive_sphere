@@ -28,6 +28,7 @@ export default class Particles {
 				t_initialPos: this.initialPos.uniform,
 				t_randomSign: this.random_sign.uniform,
 				u_middle_space: { value: 1 },
+				u_noise_amount: { value: 0 },
 				u_density: {value: 0.97},
 				u_ring: {value: 0.19},
 			},
