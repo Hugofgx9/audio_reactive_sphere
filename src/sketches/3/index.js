@@ -46,7 +46,7 @@ export default class Sketch {
 		// this.mesh.rotation.y += 0.006;
 		// this.mesh.rotation.z += 0.001;
 
-		this.mesh.program.uniforms.u_time.value = this.render.clock;
+		this.mesh.program.uniforms.u_time.value = this.render.clock * 0.01;
 		this.postprocess.render();
 	}
 }

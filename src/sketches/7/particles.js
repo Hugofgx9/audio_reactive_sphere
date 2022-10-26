@@ -121,7 +121,7 @@ export default class Particles {
 	}
 
 	update() {
-		this.position.passes[0].uniforms.u_time.value = this.render.clock;
+		this.position.passes[0].uniforms.u_time.value = this.render.clock * 0.01;
 		this.position.render();
 	}
 }

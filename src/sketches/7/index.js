@@ -132,7 +132,7 @@ export default class Sketch {
 		this.mesh1.rotation.z -= 0.002;
 		// this.mesh2.rotation.z += 0.007;
 
-		this.mesh1.program.uniforms.u_time.value = this.render.clock;
+		this.mesh1.program.uniforms.u_time.value = this.render.clock * 0.01;
 		this.particles.update();
 
 		// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
