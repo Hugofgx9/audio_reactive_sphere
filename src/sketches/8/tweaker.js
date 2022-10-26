@@ -68,6 +68,13 @@ export default class Tweaker {
 			max: 1,
 			step: 0.00001
 		});
+		particles.addInput(this.sketch.particles.position.passes[0].uniforms.u_noise2_amount, 'value', {
+			label: 'Noise2',
+			presetKey: 'noise2',
+			min: 0,
+			max: 1,
+			step: 0.00001
+		});
 
 		const colors = {
 			color1: formatTweakerColor(hslToRgb(...this.sketch.program.uniforms.u_color1.value)),
@@ -136,7 +143,7 @@ export default class Tweaker {
 		preset.addBlade({
 			view: 'buttongrid',
 			label: 'Presets',
-			size: [5, 1],
+			size: [5, 3],
 			cells: (x, y) => ({
 				title: y * 5 + x + 1,
 			}),
@@ -151,6 +158,11 @@ export default class Tweaker {
 			navigator.clipboard.writeText(JSON.stringify(this._.exportPreset()));
 			// preset_params.export = JSON.stringify(this._.exportPreset());
 		});
+
+
+		this._.addButton({
+			title: 'Play'
+		}).on('click', () => this.sketch.play())
 	}
 
 	addTab(parent, pages) {

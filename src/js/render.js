@@ -60,7 +60,7 @@ export default class Render {
     const last = past || now;
     let d = (now - last) * (60 / 1000); // normalize at 60fps
 
-    this.clock += d * 0.01;
+    this.clock += d;
 
 
     this.sketch.update();

@@ -1,6 +1,6 @@
 import { GPGPU, Texture } from 'ogl';
 import positionFrag from './position.frag';
-import { positiveOrNegative } from './utils';
+import { positiveOrNegative, random } from './utils';
 
 export default class Particles {
 
@@ -18,6 +18,7 @@ export default class Particles {
 		this.initialPos = this.createInitialPos();
 		this.position = this.createPosition();
 		this.random_sign = this.createRandomSign();
+		// const a = this.createRandomSignTexture();
 
 		this.initialPos.render();
 
@@ -27,10 +28,12 @@ export default class Particles {
 				u_time: { value: this.render.clock },
 				t_initialPos: this.initialPos.uniform,
 				t_randomSign: this.random_sign.uniform,
+				// t_randomSign: { value: a },
 				u_middle_space: { value: 1 },
 				u_noise_amount: { value: 0 },
-				u_density: {value: 0.97},
-				u_ring: {value: 0.19},
+				u_noise2_amount: { value: 0. },
+				u_density: { value: 0.97 },
+				u_ring: { value: 0.19 },
 			},
 		});
 	}
@@ -52,7 +55,36 @@ export default class Particles {
 				i * 4
 			);
 		}
+
 		return new GPGPU(this.gl, { data });
+	}
+
+	createRandomSignTexture() {
+
+		const length = this.particles_nb;
+		const data = new Int8Array(length * 4);
+
+		//sphere coordinates
+		for (let i = 0; i < length; i++) {
+
+			data.set(
+				[
+					Math.random() > 0.5 ? 1 : -1,
+					Math.random() > 0.5 ? 1 : -1,
+					Math.random() > 0.5 ? 1 : -1,
+					Math.random() > 0.5 ? 1 : -1,
+				],
+				i * 4
+			);
+		}
+
+		return new Texture(this.gl, {
+			width: Math.sqrt(length),
+			image: data,
+			type: this.gl.BYTE,
+		});
+		// return new GPGPU(this.gl, { data });}
+
 	}
 
 	createPosition() {
@@ -62,6 +94,7 @@ export default class Particles {
 		for (let i = 0; i < length; i++) {
 			data.set(
 				[
+					// random(-1, 1)
 					(Math.random() - 0.5) * 2.0 * 0.5,
 					(Math.random() - 0.5) * 2.0 * 2.,
 					(Math.random() - 0.5) * 2.0 * 0.5,
@@ -100,7 +133,7 @@ export default class Particles {
 					x2,
 					x3,
 					x4,
-					
+
 				],
 				i * 4
 			);
@@ -126,7 +159,7 @@ export default class Particles {
 	}
 
 	update() {
-		this.position.passes[0].uniforms.u_time.value = this.render.clock;
+		this.position.passes[0].uniforms.u_time.value = this.render.clock * 0.01;
 		this.position.render();
 	}
 }

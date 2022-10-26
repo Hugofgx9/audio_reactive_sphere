@@ -76,6 +76,6 @@ export function formatTweakerColor(array) {
 }
 
 
-export function random(min, max){
-	return (Math.random() * (max - min)) + min
+export function random(min, max) {
+	return (Math.random() * (max - min)) + min;
 }

@@ -5,6 +5,9 @@ import Presets from './presets';
 import frag from './sketch.frag';
 import vert from './sketch.vert';
 import Tweaker from './tweaker';
+import Audio from './audio';
+// import trackUrl from './audio/with_eyes_unclouded_by_longing.mp3';
+import trackUrl from './audio/Sestrica - Intention.mp3';
 
 
 export default class Sketch {
@@ -27,6 +30,9 @@ export default class Sketch {
 		this.init();
 		this.tweaker = new Tweaker(this);
 		this.presets = new Presets(this, { tweaker: this.tweaker });
+
+		//use to normalize at 60 fps
+		this.last_frame = 0;
 	}
 
 
@@ -36,8 +42,8 @@ export default class Sketch {
 
 		//todo custom geometry
 		const geometry = new Plane(this.gl, {
-			widthSegments: 300,
-			heightSegments: 300,
+			widthSegments: 500,
+			heightSegments: 500,
 		});
 
 		const nb = geometry.attributes.position.count;
@@ -84,6 +90,7 @@ export default class Sketch {
 				u_time: { value: 0 },
 				u_color1: { value: [0.3, 0, 0.3] },
 				u_color2: { value: [0.65, 0.2, 0.5] },
+				u_alpha: { value: 1 },
 				u_resolution: { value: [this.canvas.width, this.canvas.height] },
 				t_position: this.particles.position.uniform
 			},
@@ -111,26 +118,69 @@ export default class Sketch {
 		// this.mesh2.rotation.x = Math.PI / 2;
 
 		this.mesh2_rotation = 0;
-
-
+		this.mesh2.program.uniforms.u_alpha.value = 0.8;
 
 		this.scene.addChild(this.mesh1);
 		this.scene.addChild(this.mesh2);
+
 	}
 
+	play() {
+		this.audio = new Audio();
+		this.audio.showPreview =false
+
+		this.audio.start({
+			// onBeat: () => console.log('onBeat'),
+			live: false,
+			src: trackUrl,
+			analyse: true,
+			// shutup: true
+		});
+
+	}
+
+
 	update() {
-		this.tweaker.fpsGraph.begin();
+		const last_frame_delta = this.render.clock - this.last_frame;
+		
+		//60fps render
+		if (last_frame_delta >= 0.6) {
+			this.last_frame = this.render.clock;
 
-		this.mesh2_rotation += 0.007;
-		this.mesh2.rotation.x = this.mesh2_rotation;
+			this.tweaker.fpsGraph.begin();
 
-		this.mesh1.program.uniforms.u_time.value = this.render.clock;
-		this.particles.update();
+			if(this.audio) {
+				this.audio.update()
 
-		// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
-		// this.controls.update();
-		this.postprocess.render();
+				//todo lerp
+				// this.particles.position.passes[0].uniforms.u_noise_amount.value = this.audio.values[0];
+				this.particles.position.passes[0].uniforms.u_noise2_amount.value = this.audio.values[5] * 0.1;
 
-		this.tweaker.fpsGraph.end();
+				const a = 0.1 + this.audio.values[5] * 0.5;
+
+				this.mesh2.scale = [a,a,a];
+
+				// console.log(this.audio.waveData)
+				// console.log(this.audio.levelsData[0] > 0.8)
+				// console.log(this.audio.audioRangeTexture)
+			}
+	
+			// this.mesh2_rotation = (this.mesh2_rotation + 0.007)% (2 * Math.PI);
+			this.mesh2_rotation += 0.007;
+			this.mesh2.rotation.x = this.mesh2_rotation;
+	
+			this.program.uniforms.u_time.value = this.render.clock * 0.01;
+			this.particles.update();
+	
+			// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
+			// this.controls.update();
+			this.postprocess.render();
+	
+			this.tweaker.fpsGraph.end();
+	
+			// this.audio?.update();
+
+
+		}
 	}
 }

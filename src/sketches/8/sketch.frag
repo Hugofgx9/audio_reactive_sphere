@@ -13,6 +13,7 @@ uniform vec2 u_resolution;
 varying vec2 v_uv;
 uniform vec3 u_color1; //hsl
 uniform vec3 u_color2; //hsl
+uniform float u_alpha;
 
 void main() {
 
@@ -21,9 +22,11 @@ void main() {
 	vec3 color1 = u_color1;
 	vec3 color2 = u_color2;
 
-	color = mix(hsl2rgb(color1), hsl2rgb(color2), pow(mod(v_uv.y + u_time, 1.), 2.));
+	// color = mix(hsl2rgb(color1), hsl2rgb(color2), pow(mod(v_uv.y + u_time , 1.), 2.));
+	color = hsl2rgb(color2);
+	// color = mix(hsl2rgb(color1), hsl2rgb(color2), pow(mod(v_uv.y + u_time , 1.), 2.));
 
-	gl_FragColor = vec4(color, 1.);
+	gl_FragColor = vec4(color, u_alpha);
 
 }
 
