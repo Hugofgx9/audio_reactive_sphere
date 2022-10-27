@@ -29,8 +29,6 @@ export default class Tweaker {
 			step: 0.0001
 		});
 
-
-
 		pp_bloom.addInput(this.sketch.postprocess.brightPass.uniforms.uThreshold, 'value', {
 			label: 'Bright Threslod',
 			min: 0,

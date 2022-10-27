@@ -28,7 +28,7 @@ export default class PostProcess {
 			uniforms: {
 				uResolution: { value: [this.canvas.width, this.canvas.height] },
 				tPreviousFrame: { value: this.postFeedback.uniform },
-				uFeedbackAmount: { value: 0.68 },
+				uFeedbackAmount: { value: 0. },
 			},
 		});
 

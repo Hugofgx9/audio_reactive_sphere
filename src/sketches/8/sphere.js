@@ -59,8 +59,8 @@ export default class Sphere {
 			uniforms: {
 				u_time: { value: 0 },
 				u_color1: { value: [0.3, 0, 0.3] },
-				u_color2: { value: [0.65, 0.2, 0.5] },
-				u_alpha: { value: 0.4 },
+				u_color2: { value: [0.63, 0.2, 0.5] },
+				u_alpha: { value: 0.02 },
 				u_resolution: { value: [this.sketch.canvas.width, this.sketch.canvas.height] },
 				t_position: this.particles.position.uniform
 			},
