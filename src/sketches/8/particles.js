@@ -1,6 +1,6 @@
 import { GPGPU, Texture } from 'ogl';
 import positionFrag from './position.frag';
-import { positiveOrNegative, random } from './utils';
+import { positiveOrNegative, random, staticTextureParams } from './utils';
 
 export default class Particles {
 
@@ -23,11 +23,13 @@ export default class Particles {
 			fragment: positionFrag,
 			uniforms: {
 				u_time: { value: this.render.clock },
-				t_initialPos: {value: this.initialPos},
-				t_randomSign: {value: this.random_sign},
+				t_initialPos: { value: this.initialPos },
+				t_randomSign: { value: this.random_sign },
 				// t_randomSign: { value: a },
 				u_middle_space: { value: 1 },
+				u_middle_cut: { value: 0. },
 				u_noise_amount: { value: 0 },
+				u_noise_freq: { value: 2 },
 				u_noise2_amount: { value: 0. },
 				u_density: { value: 0.97 },
 				u_ring: { value: 0.19 },
@@ -65,28 +67,20 @@ export default class Particles {
 		for (let i = 0; i < length; i++) {
 
 			data.set([
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-					Math.random() > 0.5 ? 1 : -1,
-				],
+				positiveOrNegative(),
+				positiveOrNegative(),
+				positiveOrNegative(),
+				positiveOrNegative(),
+			],
 				i * 4
 			);
 		}
 
 		return new Texture(this.gl, {
-			image: data, 
-			type: this.gl.FLOAT,
-			format: this.gl.RGBA,
-			internalFormat: this.gl.renderer.isWebgl2 ? this.gl.RGBA32F : this.gl.RGBA,
-			wrapS: this.gl.CLAMP_TO_EDGE,
-			wrapT: this.gl.CLAMP_TO_EDGE,
-			generateMipmaps: false,
-			minFilter: this.gl.NEAREST,
-			magFilter: this.gl.NEAREST,
+			image: data,
 			width: size,
-			flipY: false,
-		})
+			...staticTextureParams(this.gl)
+		});
 
 	}
 
@@ -140,18 +134,10 @@ export default class Particles {
 
 
 		return new Texture(this.gl, {
-			image: data, 
-			type: this.gl.FLOAT,
-			format: this.gl.RGBA,
-			internalFormat: this.gl.renderer.isWebgl2 ? this.gl.RGBA32F : this.gl.RGBA,
-			wrapS: this.gl.CLAMP_TO_EDGE,
-			wrapT: this.gl.CLAMP_TO_EDGE,
-			generateMipmaps: false,
-			minFilter: this.gl.NEAREST,
-			magFilter: this.gl.NEAREST,
+			image: data,
 			width: size,
-			flipY: false,
-		})
+			...staticTextureParams(this.gl)
+		});
 	}
 
 	update() {

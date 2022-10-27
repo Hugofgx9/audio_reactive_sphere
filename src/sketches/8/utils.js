@@ -80,6 +80,86 @@ export function random(min, max) {
 	return (Math.random() * (max - min)) + min;
 }
 
-export function staticTexture(){
-	
+export function staticTextureParams(gl) {
+
+	return {
+		type: gl.FLOAT,
+		format: gl.RGBA,
+		internalFormat: gl.renderer.isWebgl2 ? gl.RGBA32F : gl.RGBA,
+		wrapS: gl.CLAMP_TO_EDGE,
+		wrapT: gl.CLAMP_TO_EDGE,
+		generateMipmaps: false,
+		minFilter: gl.NEAREST,
+		magFilter: gl.NEAREST,
+		flipY: false,
+	};
+}
+
+// export function get3TopItems(arr) {
+//   return arr.sort((a, b) => b - a).slice(0, 3);
+// }
+
+export function findTop3(array) {
+	const maxValues = [];
+	const maxIndex = [];
+	for (var i = 0; i < array.length; i++) {
+		if (i === 0) {
+			maxValues.push(array[i]);
+			maxIndex.push(i);
+		} else if (i === 1) {
+			if (array[i] > maxValues[0]) {
+				maxValues.push(maxValues[0]);
+				maxValues[0] = array[i];
+				maxIndex.push(maxIndex[0]);
+				maxIndex[0] = i;
+			} else {
+				maxValues.push(array[i]);
+				maxIndex.push(i);
+			}
+		} else if (i === 2) {
+			if (array[i] > maxValues[0]) {
+				maxValues.push(maxValues[0]);
+				maxValues[1] = maxValues[0];
+				maxValues[0] = array[i];
+				maxIndex.push(maxIndex[0]);
+				maxIndex[1] = maxIndex[0];
+				maxIndex[0] = i;
+
+			} else {
+				if (array[i] > maxValues[1]) {
+					maxValues.push(maxValues[1]);
+					maxValues[1] = array[i];
+					maxIndex.push(maxIndex[1]);
+					maxIndex[1] = i;
+				} else {
+					maxValues.push(array[i]);
+					maxIndex.push(i);
+				}
+			}
+		} else {
+			if (array[i] > maxValues[0]) {
+				maxValues[2] = maxValues[1];
+				maxValues[1] = maxValues[0];
+				maxValues[0] = array[i];
+				maxIndex[2] = maxIndex[1];
+				maxIndex[1] = maxIndex[0];
+				maxIndex[0] = i;
+			} else {
+				if (array[i] > maxValues[1]) {
+					maxValues[2] = maxValues[1];
+					maxValues[1] = array[i];
+					maxIndex[2] = maxIndex[1];
+					maxIndex[1] = i;
+				} else if (array[i] > maxValues[2]) {
+					maxValues[2] = array[i];
+					maxIndex[2] = i;
+				}
+			}
+		}
+	}
+
+	return {
+		index: maxIndex,
+		values: maxValues
+	};
 }

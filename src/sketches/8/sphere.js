@@ -1,23 +1,23 @@
 import Particles from './particles';
-import {random} from './utils';
+import { random } from './utils';
 import frag from './sketch.frag';
 import vert from './sketch.vert';
-import {Vec3, Geometry, Program, Mesh} from 'ogl';
+import { Vec3, Geometry, Program, Mesh } from 'ogl';
 
 export default class Sphere {
-	constructor(gl, {sketch, nb}){
+	constructor(gl, { sketch, nb }) {
 
 		this.gl = gl;
 		this.sketch = sketch;
 		this.nb = nb;
 		this.scene = this.sketch.scene;
-		
+
 		this.particles = new Particles(this.gl, { render: this.sketch.render, sketch: this.sketch });
 
 		this.mesh = this.createMesh();
 	}
 
-	createMesh(){
+	createMesh() {
 
 		const nb = this.nb;
 
@@ -42,7 +42,7 @@ export default class Sphere {
 			normal_data.set(normal_tmp.toArray(), index);
 		}
 
-		const position = { data: pos_data, size: 3, count: nb};
+		const position = { data: pos_data, size: 3, count: nb };
 		const normal = { data: normal_data, size: 3, count: nb };
 
 		const geometry = new Geometry(this.gl, { position, normal });

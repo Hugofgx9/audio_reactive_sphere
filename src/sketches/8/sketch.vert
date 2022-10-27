@@ -17,6 +17,7 @@ uniform float u_time;
 uniform sampler2D t_position;
 varying vec2 v_uv;
 
+
 void main() {
 
   v_uv = normalize(normalMatrix * normal).xz;
@@ -30,5 +31,6 @@ void main() {
   vec4 mvPos = viewMatrix * mPos;
   gl_Position = projectionMatrix * mvPos;
   gl_PointSize = 1.;
+
 
 }

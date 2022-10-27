@@ -51,6 +51,13 @@ export default class Tweaker {
 			max: 1,
 			step: 0.00001
 		});
+		folder_sphere1.addInput(sphere1_part_uniforms.u_middle_cut, 'value', {
+			label: 'Middle cut',
+			presetKey: 'middle_cut1',
+			min: 0,
+			max: 1,
+			step: 0.00001
+		});
 
 		folder_sphere1.addInput(sphere1_part_uniforms.u_density, 'value', {
 			label: 'Density',
@@ -80,6 +87,13 @@ export default class Tweaker {
 			min: 0,
 			max: 1,
 			step: 0.00001
+		});
+		folder_sphere1.addInput(sphere1_part_uniforms.u_noise_freq, 'value', {
+			label: 'Noise1 Freq',
+			presetKey: 'noise1freq_1',
+			min: 0,
+			max: 20,
+			step: 1
 		});
 
 		const colors_sphere1 = {

@@ -7,6 +7,7 @@ import vert from './sketch.vert';
 import Tweaker from './tweaker';
 import Sphere from './sphere';
 import Audio from './audio';
+import { findTop3 } from './utils';
 // import trackUrl from './audio/with_eyes_unclouded_by_longing.mp3';
 import trackUrl from './audio/Sestrica - Intention.mp3';
 
@@ -39,8 +40,8 @@ export default class Sketch {
 
 	init() {
 
-		this.sphere1 = new Sphere(this.gl, {sketch: this, nb: 1300000});
-		this.sphere2 = new Sphere(this.gl, {sketch: this, nb: 400000});
+		this.sphere1 = new Sphere(this.gl, { sketch: this, nb: 1300000 });
+		this.sphere2 = new Sphere(this.gl, { sketch: this, nb: 400000 });
 
 		this.sphere1.mesh.scale = [2, 2, 2];
 		this.sphere2.mesh.scale = [0.5, 0.5, 0.5];
@@ -50,7 +51,9 @@ export default class Sketch {
 
 	play() {
 		this.audio = new Audio();
-		this.audio.showPreview =false
+		this.audio.showPreview = true;
+
+		// this.audio_levels = [{}, {}, {}]
 
 		this.audio.start({
 			// onBeat: () => console.log('onBeat'),
@@ -65,40 +68,47 @@ export default class Sketch {
 
 	update() {
 		const last_frame_delta = this.render.clock - this.last_frame;
-		
+
 		//60fps render
 		if (last_frame_delta >= 0.6) {
 			this.last_frame = this.render.clock;
 
 			this.tweaker.fpsGraph.begin();
 
-			if(this.audio) {
-				this.audio.update()
+			if (this.audio) {
+				this.audio.update();
 
-				//todo lerp
+				//todo lerp low, mid and hi
 				this.sphere2.particles.position.passes[0].uniforms.u_noise_amount.value = this.audio.values[0];
 
 				const s = 0.1 + this.audio.values[5] * 0.5;
+				// const maxLevels = findTop3(this.audio.levelsData);
 
-				this.sphere2.mesh.scale = [s,s,s];
+				// console.log(maxLevels.index, this.audio.levelsData.length)
+
+
+
+				this.sphere2.mesh.scale = [s, s, s];
+
+				//max index
 
 				// console.log(this.audio.waveData)
 				// console.log(this.audio.levelsData[0] > 0.8)
 				// console.log(this.audio.audioRangeTexture)
 			}
-	
+
 			this.sphere1.particles.update();
 			this.sphere2.particles.update();
 
 			this.sphere2.rotation_x += 0.007;
-			this.sphere2.mesh.rotation.x = this.sphere2.rotation_x;
-	
+			// this.sphere2.mesh.rotation.x = this.sphere2.rotation_x;
+
 			this.sphere1.program.uniforms.u_time.value = this.render.clock * 0.01;
 			this.sphere2.program.uniforms.u_time.value = this.render.clock * 0.01;
-	
+
 			// this.render.renderer.render({ scene: this.scene, camera: this.render.camera });
 			this.postprocess.render();
-	
+
 			this.tweaker.fpsGraph.end();
 
 		}
