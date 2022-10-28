@@ -10,6 +10,8 @@ export default class Presets {
 
 		this.tl = null;
 
+
+		//tweaker presets
 		this.presets = [
 			{ "middle_space1": 1, "density1": 0, "ring1": 0, "feedback_amount": 0.68, "bright_threeslod": 0.66, "bloom_strength": 2.4 },
 			{ "middle_space1": 1, "density1": 0.9782600000000001, "ring1": 0.19564999999999994, "feedback_amount": 0.68, "bright_threeslod": 0.66, "bloom_strength": 2.4 },
@@ -65,6 +67,7 @@ export default class Presets {
 		};
 
 
+		//use for time based animations
 		this.values = {
 			middle_space1: sphere1_position_uniforms.u_middle_space.value,
 			density1: sphere1_position_uniforms.u_density.value,
@@ -86,6 +89,7 @@ export default class Presets {
 
 		};
 
+		//use for animejs animation on top of timebased
 		this.values_offset = {
 			middle_space1: 0,
 			density1: 0,
@@ -195,12 +199,13 @@ export default class Presets {
 			this.values.noise1_freq_1 = Math.random() > 0.5 ? 0 : 10;
 		}
 
-		Object.entries(this.values).forEach(([key, value]) => {
+		//compute 
+		Object.keys(this.values).forEach((key) => {
 			// this.references[key]
 			if (typeof this.values[key] === "undefined" || typeof this.values_offset[key] === "undefined" || typeof this.references[key] === "undefined") {
 				console.warn('key', key);
 			}
-			else this.references[key].value = value + this.values_offset[key];
+			else this.references[key].value = this.values[key] + this.values_offset[key];
 
 		});
 	}
