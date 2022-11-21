@@ -1,8 +1,8 @@
 import { Renderer, Transform, Camera } from 'ogl';
 import { getCurrentURLPath } from './utils';
-import sketches from './sketches';
+import Gl from '@gl';
 
-export default class Render {
+export default class Experience {
 
   constructor() {
     this.init();
@@ -29,7 +29,11 @@ export default class Render {
     this.camera.lookAt([0, 0, 0]);
     this.camera.perspective({ aspect: this.canvas.width / this.canvas.height });
 
-    this.instantiateSketchFromPath();
+    this.gl = new Gl(this.gl, {
+      canvas: this.canvas,
+      scene: this.scene,
+      render: this,
+    });
 
     window.addEventListener('resize', () => this.resize());
     this.play();
@@ -43,15 +47,8 @@ export default class Render {
 
   }
 
-  instantiateSketchFromPath() {
-    const path_index = getCurrentURLPath() - 1;
-
-    this.sketch = new sketches[path_index](this.gl, {
-      canvas: this.canvas,
-      scene: this.scene,
-      render: this,
-    });
-
+  start(){
+    this.gl.play()
   }
 
 
@@ -62,8 +59,7 @@ export default class Render {
 
     this.clock += d;
 
-
-    this.sketch.update();
+    this.gl.update();
 
     // Don't need a camera if camera uniforms aren't required
     // this.renderer.render({ scene: this.scene, camera: this.camera });

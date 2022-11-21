@@ -1,11 +1,11 @@
 precision highp float;
 
 // #pragma glslify: cosPalette = require(./utils/cosPalette.glsl);
-// #pragma glslify: snoise3 = require(../../glsl/utils/noises/snoise3.glsl);
-// #pragma glslify: snoise2 = require(../../glsl/utils/noises/snoise2.glsl);
+// #pragma glslify: snoise3 = require(../glsl/utils/noises/snoise3.glsl);
+// #pragma glslify: snoise2 = require(../glsl/utils/noises/snoise2.glsl);
 // #pragma glslify: snoise4 = require(../../snoise4.glsl);
-// #pragma glslify: circle = require(../../glsl/utils/sdf/circle.glsl);
-#pragma glslify: hsl2rgb = require(../../glsl/utils/colors/hsl2rgb.glsl);
+// #pragma glslify: circle = require(../glsl/utils/sdf/circle.glsl);
+#pragma glslify: hsl2rgb = require(../glsl/utils/colors/hsl2rgb.glsl);
 // #pragma glslify: map = require(@hugofgx9/glsl-toys/map.glsl);
 
 uniform float u_time;

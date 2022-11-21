@@ -14,8 +14,7 @@ export default defineConfig({
     alias: {
       '@src': path.resolve(__dirname, './src'),
       '@js': path.resolve(__dirname, './src/js'),
-      '@sketches_1': path.resolve(__dirname, './src/js/sketches'),
-      '@sketches': path.resolve(__dirname, './src/sketches'),
+      '@gl': path.resolve(__dirname, './src/gl'),
       '@glsl': path.resolve(__dirname, './src/glsl'),
     },
   },

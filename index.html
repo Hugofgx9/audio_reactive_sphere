@@ -9,18 +9,9 @@
 </head>
 
 <body>
-  <div x-data>
-    <template x-if="$store.navigation.isRootPath">
-      <div class="home-navigation">
-        <template x-for="index in $store.sketches.items">
-          <a x-bind:href="window.location.origin + '/' + index" x-text="'Sketch ' + index"> </a>
-        </template>
-      </div>
-    </template>
-
-    <template x-if="!$store.navigation.isRootPath">
+  <div x-data="container" class="alpineContainer">
+      <button id="btnStart" x-show="isButtonOpen" @click.once="closeButton" >Start</button>
       <canvas id="myCanvas" width="400" height="400"> </canvas>
-    </template>
   </div>
 
   <script src="/src/js/index.js" type="module"></script>

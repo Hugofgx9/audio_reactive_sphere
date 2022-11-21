@@ -23,8 +23,6 @@ export default class Sketch {
 		this.scene = scene;
 		this.postprocess = new PostProcess(this.gl, { render: this.render });
 
-
-
 		// this.controls = new Orbit(this.render.camera, {
 		// 	target: new Vec3(0, 0, 0),
 		// 	// enabled: false
@@ -47,9 +45,9 @@ export default class Sketch {
 		// 	interval: 40,
 		// });
 
-		document.addEventListener('keydown', (ev) => {
-			if (ev.key == "Enter") this.play();
-		});
+		// document.addEventListener('keydown', (ev) => {
+		// 	if (ev.key == "Enter") this.play();
+		// });
 	}
 
 

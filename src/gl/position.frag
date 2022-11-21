@@ -1,9 +1,9 @@
 precision highp float;
 
-#pragma glslify: rotate2d = require(../../glsl/utils/rotate2d.glsl);
-#pragma glslify: noise3 = require(../../glsl/utils/noises/snoise3.glsl);
-#pragma glslify: noise4 = require(../../glsl/utils/noises/snoise4.glsl);
-#pragma glslify: map = require(../../glsl/utils/map.glsl);
+#pragma glslify: rotate2d = require(../glsl/utils/rotate2d.glsl);
+#pragma glslify: noise3 = require(../glsl/utils/noises/snoise3.glsl);
+#pragma glslify: noise4 = require(../glsl/utils/noises/snoise4.glsl);
+#pragma glslify: map = require(../glsl/utils/map.glsl);
 
 uniform float u_time;
 uniform float u_middle_space;
